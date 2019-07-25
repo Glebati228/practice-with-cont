@@ -220,7 +220,7 @@ public:
 		printf("\n");
 	}
 
-	void resize(size_t _tSize) // TODO: optimize this method (gIntArray not deleting (memory leak)) pog
+	void resize(size_t _tSize) // TODO: optimize this method 
 	{
 		gIntArray g(_tSize); 
 		size_t _tempSize = (_tSize > _size) ? _size : _tSize;
@@ -420,7 +420,7 @@ public:
 		return *this;
 	}
 
-	void gClear() // TODO: make clear func // 2
+	void gClear() 
 	{
 		for (size_t i = 0; i < g_x; i++)
 			for (size_t k = 0; k < g_y; k++)
