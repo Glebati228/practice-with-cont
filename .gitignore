@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+gError.h
+gStr.h
+TaskNormal1.cpp
