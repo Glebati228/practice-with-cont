@@ -130,12 +130,12 @@ public:
 		return *this;
 	}
 
-	inline int * gBegin() const override 
+	int * gBegin() const override 
 	{
 		return &_data[0];
 	}
 
-	inline int * gEnd() const override
+	int * gEnd() const override
 	{
 		return &_data[_size];
 	}
@@ -152,7 +152,7 @@ public:
 		g._data = _tempData;
 	}
 
-	inline int get(size_t i) const
+	int get(size_t i) const
 	{
 		if(i > _size)
 			return OUT_OF_BOUNDARY;
@@ -160,7 +160,7 @@ public:
 		return _data[i];
 	}
 
-	inline int * getPtr(size_t i) 
+	int * getPtr(size_t i) 
 	{
 		if (i > _size)
 			return &_data[_size];
@@ -187,7 +187,7 @@ public:
 		return SUCCESS_EXIT;
 	}
 
-	inline size_t size() const
+	size_t size() const
 	{
 		return _size;
 	};
@@ -220,7 +220,7 @@ public:
 		printf("\n");
 	}
 
-	void resize(size_t _tSize) // TODO: optimize this method (gIntArray not deleting (memory leak)) my name is Eblan
+	void resize(size_t _tSize) // TODO: optimize this method (gIntArray not deleting (memory leak)) pog
 	{
 		gIntArray g(_tSize); 
 		size_t _tempSize = (_tSize > _size) ? _size : _tSize;
@@ -238,6 +238,7 @@ private:
 
 };
 
+//simple 2d array, in future will be maked a universal arr
 class gIntArrays 
 {
 public:
@@ -288,6 +289,7 @@ public:
 		return *this;
 	}
 
+	//simple matrix operations
 	gIntArrays & operator+(gIntArrays const & g)
 	{
 		size_t x = (g.g_x > g_x) ? g_x : g.g_x;
@@ -301,7 +303,20 @@ public:
 
 	}
 
-	inline int SetOnIndex(size_t x, size_t y, int v)
+	gIntArrays & operator-(gIntArrays const & g)
+	{
+		size_t x = (g.g_x > g_x) ? g_x : g.g_x;
+		size_t y = (g.g_y > g_y) ? g_y : g.g_y;
+
+		for (size_t i = 0; i < x; i++)
+			for (size_t k = 0; k < y; k++)
+				g_data[i][k] -= g.g_data[i][k];
+
+		return *this;
+
+	}
+
+	int SetOnIndex(size_t x, size_t y, int v)
 	{
 		if (x > g_x || y > g_y || x < 0 || y < 0)
 			return OUT_OF_BOUNDARY;
@@ -310,12 +325,12 @@ public:
 		return SUCCESS_EXIT;
 	}
 
-	inline size_t gSizeX() const
+	size_t gSizeX() const
 	{
 		return g_x;
 	}
 
-	inline size_t gSizeY() const
+	size_t gSizeY() const
 	{
 		return g_y;
 	}
@@ -412,7 +427,7 @@ public:
 				g_data[i][k] = 0;
 	}
 
-	inline int get(size_t x, size_t y)
+	int get(size_t x, size_t y) const
 	{
 		if (x > g_x || y > g_y)
 			return OUT_OF_BOUNDARY;
@@ -420,7 +435,7 @@ public:
 		return g_data[x][y];
 	}
 
-	inline int * getPtr(size_t x, size_t y)
+    int * getPtr(size_t x, size_t y)
 	{
 		if (x > g_x || y > g_y)
 			return &g_data[g_x][g_y];
@@ -456,14 +471,28 @@ private:
 
 };
 
-template<typename Type>
+//universal container
+template<typename T>
 class gArray
 {
 public:
+	gArray(const T& val_ = T())
+		: val(val_)
+	{
 
+	}
 
+	template <class U>
+	gArray(const gArray<U>& rhs)
+		: val(static_cast<T>(rhs.val))
+	{
+
+	}
 private:
+	T val;
 
+	template <class U>
+	friend class gArray;
 };
 
 // TODO: make universal containers such like this containers // 3

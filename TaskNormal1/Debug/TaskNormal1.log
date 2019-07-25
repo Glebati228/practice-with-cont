@@ -1,6 +1,6 @@
 ﻿  TaskNormal1.cpp
-c:\users\hp\source\repos\tasknormal1\tasknormal1\tasknormal1.cpp(19): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-c:\users\hp\source\repos\tasknormal1\tasknormal1\tasknormal1.cpp(77): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\hp\source\repos\tasknormal1\tasknormal1\tasknormal1.cpp(84): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\hp\source\repos\tasknormal1\tasknormal1\tasknormal1.cpp(114): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  TaskNormal1.vcxproj -> C:\Users\HP\source\repos\TaskNormal1\Debug\TaskNormal1.exe
+c:\users\hp\documents\github\practice-with-cont\tasknormal1\tasknormal1.cpp(19): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\hp\documents\github\practice-with-cont\tasknormal1\tasknormal1.cpp(77): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\hp\documents\github\practice-with-cont\tasknormal1\tasknormal1.cpp(84): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\hp\documents\github\practice-with-cont\tasknormal1\tasknormal1.cpp(114): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  TaskNormal1.vcxproj -> C:\Users\HP\Documents\GitHub\practice-with-cont\Debug\TaskNormal1.exe
