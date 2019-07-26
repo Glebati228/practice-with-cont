@@ -476,20 +476,158 @@ template<typename T>
 class gArray
 {
 public:
-	gArray(const T& val_ = T())
-		: val(val_)
+
+	gArray(const size_t val_) : val(new T[val_]), _size(val_)
+	{
+		for (size_t i = 0; i < val_; ++i)
+		{
+			val[i] = 0;
+		}
+	}
+
+	gArray(const size_t size_, T *val_) : _size(size_), val(val_)
 	{
 
 	}
 
 	template <class U>
-	gArray(const gArray<U>& rhs)
-		: val(static_cast<T>(rhs.val))
+	gArray(const gArray<U>& rhs) : _size(rhs._size), val(new T[rhs._size])
+	{
+		for (size_t i = 0; i < rhs._size; ++i)
+		{
+			val[i] = static_cast<T>(rhs.val[i]);
+		}
+	}
+
+	gArray<T>& operator=(const gArray<T> &g)
+	{
+		if(this != &g)
+		{
+			delete[] val;
+			_size = g._size;
+			val = new T[g._size];
+
+			for (size_t i = 0; i < _size; ++i)
+			{
+				val[i] = g.val[i];
+			}
+		}
+
+		return *this;
+	}
+
+	gArray<T>& operator+(const gArray<T> &g)
 	{
 
+		return *this;
 	}
+
+	gArray<T>& operator-(const gArray<T> &g)
+	{
+
+		return *this;
+	}
+
+	void Swap(gArray<T> &g)
+	{
+		const size_t tempSize = _size;
+		_size = g._size;
+		g._size = tempSize;
+
+		T * const tempVal = val;
+		val = g.val;
+		g.val = tempVal;
+	}
+
+	void Resize(size_t s)
+	{
+		gArray<T> g(s);
+		size_t nSize = (g._size > _size) ? _size : g._size;
+
+		for (size_t i = 0; i < nSize; ++i)
+		{
+			g.val[i] = val[i];
+		}
+		Swap(g);
+	}
+
+	bool gContains(T &gVal)
+	{
+		for (size_t i = 0; i < _size; ++i)
+		{
+			if (gVal == val[i])
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	T get(size_t i) const
+	{
+		return val[i];
+	}
+
+	T& get(size_t i)
+	{
+		return val[i];
+	}
+
+	int SetOnIndex(size_t &i, T &gVal)
+	{
+		if (i > _size)
+			return OUT_OF_BOUNDARY;
+
+		val[i] = gVal;
+		return SUCCESS_EXIT;
+	}
+
+	size_t getSize() const
+	{
+		return _size;
+	}
+
+	void gPush(T &gVal) // TODO: fix this
+	{
+		gArray<T> g(*this);
+		delete[] val;
+		val = new T[++_size];
+
+		for (size_t i = 0; i < (_size - 1); ++i)
+		{
+			val[i] = g.val[i];
+		}
+		val[_size] = gVal;
+	}
+
+	void gPop()
+	{
+		gArray<T> g(*this);
+		delete[] val;
+		val = new T[--_size];
+
+		for (size_t i = 0; i < _size; ++i)
+		{
+			val[i] = g.val[i];
+		}
+	}
+
+	void gShow()
+	{
+		printf("\n");
+		for (size_t i = 0; i < _size; ++i)
+			cout << val[i] << "\t";
+		printf("\n");
+	}
+
+	~gArray()
+	{
+		delete[] val;
+	}
+
 private:
-	T val;
+	size_t _size;
+	T *val;
 
 	template <class U>
 	friend class gArray;
